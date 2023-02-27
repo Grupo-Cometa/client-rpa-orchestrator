@@ -25,7 +25,7 @@
                       return value || 'Requerido';
                     },
                   ]"
-                  accept=""
+                  accept="application/xaml+xml"
                   v-model="item.file"
                   label="Diretório Uipath"
                   prepend-icon="mdi-folder"

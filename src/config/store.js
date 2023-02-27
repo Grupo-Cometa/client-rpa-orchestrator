@@ -1,5 +1,5 @@
 import initWebSocket from "@/services/websocket/websocket";
-const path = require('path');
+
 const Store = require("electron-store");
 
 const store = new Store({
@@ -18,15 +18,10 @@ export default {
     data.push(item);
     store.set(key, data);
   },
-  update(){
-    let dir, file;
-    let data = store.get('robots');
-    data.forEach(robot => {
-      file = path.basename(robot.filename, path.extname(robot.filename));
-      dir = path.dirname(robot.filename)
-      console.log(dir, file)
-      
-    });
+  update(key, index, item){
+    let data = store.get(key);
+    data[index] = item;
+    store.set(key,data);
   },
   delete(key, index){
     let data = store.get(key);

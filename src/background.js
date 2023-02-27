@@ -6,8 +6,8 @@ import initTray from './config/tray';
 import setStartWithWindows from './config/startup';
 import setUpdateConfig from './config/update';
 import createWindow from './config/window';
-import store from './config/store'
 
+require('events').EventEmitter.prototype._maxListeners = 1000;
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
@@ -15,7 +15,6 @@ protocol.registerSchemesAsPrivileged([
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const electron = require('electron')
 const dialog = electron.dialog
-var win = null
 
 dialog.showErrorBox = function(title, content) {
   console.log(`${title}\n${content}`);
@@ -34,8 +33,7 @@ app.on('activate', async () => {
 });
 
 app.on('ready', async () => {
-  store.update()
-  win = await createWindow()
+  let win = await createWindow()
   
   initWebSocket()
   setUpdateConfig()
@@ -55,16 +53,5 @@ app.on('ready', async () => {
     app.relaunch()
     app.quit()
   }, 3600000);
-})
 
-const gotTheLock = app.requestSingleInstanceLock();
-if (!gotTheLock) {
-  app.quit();
-} else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
-    if (win) {
-      if (win.isMinimized()) win.restore();
-      win.focus();
-    }
-  });
-}
+})
