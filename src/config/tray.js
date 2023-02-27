@@ -16,6 +16,6 @@ export default function initTray(win) {
     ]);
 
     tray = new Tray(process.cwd() + '/src/icons/icon.png');
-    tray.setToolTip('Client Rpa Orchestrator 41');
+    tray.setToolTip('Client Rpa Orchestrator 40');
     tray.setContextMenu(contextMenu);
 }
