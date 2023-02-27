@@ -57,14 +57,14 @@ app.on('ready', async () => {
   }, 3600000);
 })
 
-const gotTheLock = app.requestSingleInstanceLock();
-if (!gotTheLock) {
-  app.quit();
-} else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
-    if (win) {
-      if (win.isMinimized()) win.restore();
-      win.focus();
-    }
-  });
-}
+// const gotTheLock = app.requestSingleInstanceLock();
+// if (!gotTheLock) {
+//   app.quit();
+// } else {
+//   app.on('second-instance', (event, commandLine, workingDirectory) => {
+//     if (win) {
+//       if (win.isMinimized()) win.restore();
+//       win.focus();
+//     }
+//   });
+// }

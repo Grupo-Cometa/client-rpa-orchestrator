@@ -4,7 +4,7 @@ var tray = null;
 export default function initTray(win) {
     const contextMenu = Menu.buildFromTemplate([
         {
-            label: 'Abrir Painel 42', click: function () {
+            label: 'Abrir Painel', click: function () {
                 if (!win.isVisible()) win.show()
             }
         },
@@ -16,6 +16,6 @@ export default function initTray(win) {
     ]);
 
     tray = new Tray(process.cwd() + '/src/icons/icon.png');
-    tray.setToolTip('Client Rpa Orchestrator');
+    tray.setToolTip('Client Rpa Orchestrator 40');
     tray.setContextMenu(contextMenu);
 }
