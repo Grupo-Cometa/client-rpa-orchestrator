@@ -21,7 +21,7 @@ export default class Publish {
       } catch (e) {
         logs.error('status error ' + e)
         app.relaunch()
-        app.exit(0)
+        app.quit()
       }   
     }, 3500);
   }

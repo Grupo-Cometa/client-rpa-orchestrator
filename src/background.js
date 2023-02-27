@@ -25,7 +25,7 @@ app.setAppUserModelId('Client Rpa Orchestrator');
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.exit(0)
+    app.quit()
   }
 });
 
@@ -53,13 +53,13 @@ app.on('ready', async () => {
 
   setInterval(() => {
     app.relaunch()
-    app.exit(0)
+    app.quit()
   }, 3600000);
 })
 
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
-  app.exit(0);
+  app.quit();
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
     if (win) {
