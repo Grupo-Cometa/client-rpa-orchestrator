@@ -16,9 +16,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const electron = require('electron')
 const dialog = electron.dialog
 
-dialog.showErrorBox = function(title, content) {
+dialog.showErrorBox = function (title, content) {
   console.log(`${title}\n${content}`);
 };
+
+const isSecondInstance = app.requestSingleInstanceLock();
+
+if (!isSecondInstance) app.quit();
 
 app.setAppUserModelId('Client Rpa Orchestrator');
 
@@ -34,11 +38,11 @@ app.on('activate', async () => {
 
 app.on('ready', async () => {
   let win = await createWindow()
-  
+
   initWebSocket()
   setUpdateConfig()
   initTray(win)
-  
+
   if (!isDevelopment) setStartWithWindows()
 
   ws.onEvent(`watcher.${hostname()}`, (event) => {
